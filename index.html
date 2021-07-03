@@ -29,9 +29,6 @@
 				padding: 14px 8px 12px 40px;
 				background: #eee;
 				font-family: Tahoma, sans-serif;
-			    text-align:right-justify;
-			    list-style-position: inside;
-
 			}
 
 			
@@ -45,7 +42,10 @@
 			}
 			span{
 				color:red;
-				
+				border: 2px white;
+
+				border-radius: 4px;
+
 			}
 
 		</style>
@@ -116,7 +116,9 @@
   //update our var itemToAdd to contain the txtField value (as stored in textNode)
   itemToAdd.appendChild(newItem);
 
-
+  let	checkbox = document.createElement('input');
+  checkbox.type = "checkbox";
+  itemToAdd.append(checkbox);
 
   let exitSpan = document.createElement( 'span' )
 
@@ -134,13 +136,11 @@
   //add itemToAdd to our running to-do list
 
 
-	let	checkbox = document.createElement('input');
-    checkbox.type = "checkbox";
+	
 
 
   //this is where we need to check to make sure that the input field value is not null
   if( document.getElementById("inputField").value != ''){
-  	itemToAdd.append(checkbox);
   	todoList.appendChild(itemToAdd);
   }
 
