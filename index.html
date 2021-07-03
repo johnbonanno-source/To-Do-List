@@ -31,11 +31,7 @@
 				font-family: Tahoma, sans-serif;
 			}
 
-			ul li.checked {
-				background: #888;
-				color: #fff;
-				text-decoration: line-through;
-			}
+			
 
 			div {
 				width: 45%;
@@ -86,9 +82,13 @@
   //and lets try to put a X button in a span to delete each item with
 
   for (let i = 0; i < currentItems.length; i++) {
+  	let	checkbox = document.createElement('input');
+    checkbox.type = "checkbox";
+
   	let exitSpan = document.createElement('span')
   	let exitSign = document.createTextNode("×");
   	exitSpan.appendChild(exitSign);
+  	currentItems[i].append(checkbox);
   	currentItems[i].appendChild(exitSpan);
   	exitSpan.addEventListener('click', function () {
   		this.parentElement.remove();
@@ -112,23 +112,30 @@
 
 
   let exitSpan = document.createElement( 'span' )
+
   exitSpan.appendChild( document.createTextNode( "×" ) );
 
   itemToAdd.appendChild( exitSpan );
 
   exitSpan.addEventListener('click', function () {
+
   	this.parentElement.remove();
+
   });
 
   //put this new textNode item newItem in our newlycreated list; itemToAdd
   //add itemToAdd to our running to-do list
 
+
+	let	checkbox = document.createElement('input');
+    checkbox.type = "checkbox";
+
+
   //this is where we need to check to make sure that the input field value is not null
   if( document.getElementById("inputField").value != ''){
+  	itemToAdd.append(checkbox);
   	todoList.appendChild(itemToAdd);
   }
-
-
 
 
 }
