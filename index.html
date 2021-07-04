@@ -7,31 +7,70 @@
 	<!-- <script src="https:linktojavascriptfile.js" crossorigin="JB"> -->
 		<!-- maybe it would be fruitful to use separate file for js and css  -->
 		<title>To-Do List Manager</title>
+		
 		<style>
 			input[type=text], select {
-
 				box-sizing: border-box;
 				width: 45%;
-				padding: 14px 25px;
-				margin: 8px 0;
-				border-radius: 4px;
-				border: 2px solid LightGray;
+				border-radius: 25px;
 			}
 
-			button[type=text]:hover {
-				background-color: #45a049;
+			button[type=submit] {
+				background-color: green;
+			}
+
+			.submit{
+				color: black;
+				background: white;
+				border-radius: 25px;	
+
+			}
+			.submit:hover {
+				background: LightGreen;
+			}
+			.input{
+				margin-right: 0px;
+				position: absolute;
+				right: 0;
+				
 			}
 
 			ul{
-				border: 2px LightGray;
-				border-radius: 0px;
+				width: 65%;
+				margin: 0;
+				padding: 0;
+
 				list-style: none;
-				padding: 14px 8px 12px 40px;
-				background: #eee;
 				font-family: Tahoma, sans-serif;
 			}
 
+			ul li:nth-child(odd)
+			{
+				background-color: LightGrey;
+			}
+			ul li:hover {
+				background: LightGreen;
+			}
+			li {
+				margin-left: 20px;
+				position: relative;
+			}
+			span {
+				margin-right: 0px;
+				position: absolute;
+				right: 0;
+			}
+
 			
+			ul li.checked {
+				background: Yellow;
+				color: black;
+				font-style: bold;
+				text-decoration-thickness: auto;
+				text-decoration: line-through;
+
+			}
+
 
 			div {
 				width: 45%;
@@ -40,114 +79,64 @@
 				padding: 20px;
 				margin: auto;
 			}
-			span{
-				color:red;
-				border: 2px white;
 
-				border-radius: 4px;
-
-			}
+			h1{font-color: white;}
 
 		</style>
-	</head>
+		</head>
 
-	<body>
-		<div>
-			<center>
-
-				<font color="green">
-					<h1> Welcome to the to-do list manager </h1>
-				</font>
-
-				<center>
-					<img src="https://i.imgur.com/1gTKJeD.jpg" width="300" height="200">
-					<h3> current to-do items: </h3>
-				</center>
-
-				<input type ="submit" onclick="add()"></button>
-
-				<input type="text" id="inputField" size = "40" placeholder="Describe your to do list item here...">
-
-				<ul id="todoList">
-					<li>Hit the gym</li>
-					<li>Meet George</li>
-					<li>Buy eggs</li>
-					<li>Read a book</li>
-					<li>Organize office</li>
-				</ul>
-			</center>
+		<body>
 			<div>
-			</body>
+				<center>
+
+					<h1> Welcome to the to-do list manager </h1>
+
+					<center>
+						<img src="https://i.imgur.com/1gTKJeD.jpg" width="300" height="200">
+						<h3> current to-do items: </h3>
+					</center>
+
+					<input type ="submit" class="submit" onclick="add()"></button>
+					<input type="text" id="inputField" size = "40" placeholder="Describe your to do list item here...">
+					<ul id="todoList">
+					</ul>
+
+				</center>
+			<div>
+		</body>
 
 
 
-			<script>
+	<script>
+		var list = document.querySelector('ul');
+		document.querySelector('ul').addEventListener('click', function(ev) {
+			if (ev.target.tagName === 'LI') {
+				ev.target.classList.toggle('checked');
+			}
+		}, false);
 
+		function add() {
+		  //this block will add a new list element to the element with id "todoList"
+		  //create list object
+		  let itemToAdd = document.createElement("LI");
+		  //get value from text field and put it in a textNode
+		  let newItem = document.createTextNode(document.getElementById("inputField").value );
 
-  //here, we get all the elements from our current to do list
-  let currentItems = document.getElementsByTagName("li");
-  //and lets try to put a X button in a span to delete each item with
+		  //update our var itemToAdd to contain the txtField value (as stored in textNode)
+		  itemToAdd.appendChild(newItem);
+		  let exitSpan = document.createElement( 'span' )
+		  exitSpan.appendChild( document.createTextNode( "×" ) );
+		  itemToAdd.appendChild( exitSpan );
+		  exitSpan.addEventListener('click', function () {
+		  	this.parentElement.remove();
+		  });
+		  //this is where we need to check to make sure that the input field value is not null
+		  if( document.getElementById("inputField").value != ''){
+		  	todoList.appendChild(itemToAdd);
+		  }
 
-  for (let i = 0; i < currentItems.length; i++) {
-  	let	checkbox = document.createElement('input');
-    checkbox.type = "checkbox";
+		}	
+	</script>
 
-  	let exitSpan = document.createElement('span')
-  	let exitSign = document.createTextNode("×");
-  	exitSpan.appendChild(exitSign);
-  	currentItems[i].append(checkbox);
-  	currentItems[i].appendChild(exitSpan);
-  	exitSpan.addEventListener('click', function () {
-  		this.parentElement.remove();
-  	});
-
-  } 
-
-
-  function add() {
-  //this block will add a new list element to the element with id "todoList"
-  
-  //create list object
-  let itemToAdd = document.createElement("LI");
-
-  //get value from text field and put it in a textNode
-  let newItem = document.createTextNode(document.getElementById("inputField").value );
-
-  //update our var itemToAdd to contain the txtField value (as stored in textNode)
-  itemToAdd.appendChild(newItem);
-
-  let	checkbox = document.createElement('input');
-  checkbox.type = "checkbox";
-  itemToAdd.append(checkbox);
-
-  let exitSpan = document.createElement( 'span' )
-
-  exitSpan.appendChild( document.createTextNode( "×" ) );
-
-  itemToAdd.appendChild( exitSpan );
-
-  exitSpan.addEventListener('click', function () {
-
-  	this.parentElement.remove();
-
-  });
-
-  //put this new textNode item newItem in our newlycreated list; itemToAdd
-  //add itemToAdd to our running to-do list
-
-
-	
-
-
-  //this is where we need to check to make sure that the input field value is not null
-  if( document.getElementById("inputField").value != ''){
-  	todoList.appendChild(itemToAdd);
-  }
-
-
-}
-
-
-</script>
 </html>
 
