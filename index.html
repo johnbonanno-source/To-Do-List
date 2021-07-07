@@ -144,7 +144,7 @@
 			<div class="selector">
 				<input type="checkbox" id="pending" name="pendng" value="pending" onclick="display(this)">
 				<label for="vehicle1">Display Pending</label><br>
-				<input type="checkbox" id="completed" name="completed" value="completed">
+				<input type="checkbox" id="completed" name="completed" value="completed" onclick="display2(this)">
 				<label for="vehicle2">Display Completed</label><br>
 			</div>
 
@@ -229,16 +229,36 @@ function add() {
 }
 
 function display( element ) {
-let myNodelist = document.getElementsByTagName( "LI" );
+  let myNodelist = document.getElementsByTagName( "LI" );
 
-for ( let i = 0; i < myNodelist.length ; i++){
-	// if ( element.checked ){
-	if( myNodelist[i].classList.contains('checked') ){
-		myNodelist[i].style.visibility = 'none';
-	}
+  for ( let i = 0; i < myNodelist.length ; i++){
+    if( element.checked ){
+        if( myNodelist[i].classList.contains('checked') ){
+          myNodelist[i].style.visibility = 'visible';
+        }
+        else{myNodelist[i].style.visibility = 'hidden';}
+    }
+    else{
+       myNodelist[i].style.visibility = 'visible';
+    }
+
+  }
 }
+function display2( element ) {
+  let myNodelist = document.getElementsByTagName( "LI" );
 
+  for ( let i = 0; i < myNodelist.length ; i++){
+    if( element.checked ){
+        if( myNodelist[i].classList.contains('completed') ){
+          myNodelist[i].style.visibility = 'visible';
+        }
+        else{myNodelist[i].style.visibility = 'hidden';}
+    }
+    else{
+       myNodelist[i].style.visibility = 'visible';
+    }
 
+  }
 }
 
 
