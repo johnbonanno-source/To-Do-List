@@ -10,124 +10,128 @@
 <!-- 1. Begin the assignment by sending a link to the repository in a reply to this email no later than Thursday, July 1st.
 
 2. Build the implementation in 1 week while meeting at least the minimum functionality requirements:
-    - View a list of to-do items with the ability to filter the list by pending, complete, and all to-dos
-    - Create a new to-do item
-    - Edit a to-do item
-    - Delete a to-do item
-    - Complete a to-do item
+- View a list of to-do items with the ability to filter the list by pending, complete, and all to-dos
+- Create a new to-do item
+- Edit a to-do item
+- Delete a to-do item
+- Complete a to-do item
 
-    3. Complete the assignment by sending the deployed application link in a reply to this email no later than Thursday, July 8th. -->
-
-
-    <title>To-Do List Manager</title>
-
-    <style>
-    	h1{font-style: arial;}
-    	input[type=text], select {
-    		box-sizing: border-box;
-    		width: 45%;
-    		border-radius: 25px;
-    	}
-
-    	button[type=submit] {
-    		background-color: green;
-    	}
-
-    	.submit{
-    		color: black;
-    		background: white;
-    		border-radius: 25px;	
-
-    	}
-    	.submit:hover {
-    		background: LightGreen;
-    	}
-    	.input{
-    		margin-right: 0px;
-    		position: relative;
-    		right: 0;
-
-    	}
+3. Complete the assignment by sending the deployed application link in a reply to this email no later than Thursday, July 8th. -->
 
 
-    	ul{
-    		width: 45%;
-    		margin: 0;
-    		padding: 0;
+<title>To-Do List Manager</title>
 
-    		list-style: none;
-    		font-family: Tahoma, sans-serif;
-    	}
+<style>
+	h1{font-style: arial;}
+	input[type=text], select {
+		box-sizing: border-box;
+		width: 45%;
+		border-radius: 25px;
+	}
 
-    	ul li:nth-child(odd)
-    	{
-    		background-color: LightGrey;
-    	}
-    	ul li:hover {
-    		background: LightGreen;
-    	}
-    	li {
-    		margin-left: 20px;
-    		position: relative;
-    	}
-    	span {
-    		margin-right: 0px;
-    		position: absolute;
-    		right: 0;
-    		background-color: #CD5C5C;
+	button[type=submit] {
+		background-color: green;
+	}
 
-    	}
-    	span:hover{
-    		background-color: red;
-    	}
-    	edit {
-    		margin-right: 40px;
-    		position: absolute;
-    		right: 0;
-    		background-color: Gray;
-    	}
-    	edit:hover{
-    		background-color: Green;
-    	}
+	.submit{
+		color: black;
+		background: white;
+		border-radius: 25px;	
 
+	}
+	.submit:hover {
+		background: LightGreen;
+	}
+	.input{
+		margin-right: 0px;
+		position: relative;
+		right: 0;
 
-    	ul li.checked {
-    		background: Yellow;
-    		color: black;
-    		font-style: bold;
-    		text-decoration-thickness: auto;
-    		text-decoration: line-through;
+	}
+	ul{
+		width: 45%;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-family: Tahoma, sans-serif;
 
-    	}
-    	ul li.checked:hover {
-    		background-color: LightGreen;
-    	}
+	}
 
-    	ul li.completed {
-    		background: Green;
-    		color: black;
-    		font-style: bold;
-    		text-decoration-thickness: auto;
-    		text-decoration: line-through;
-    	}
-    	ul li.completed:hover {
-    		background-color: LightGreen;
-    	}
+	ul li:nth-child(odd)
+	{
+		background-color: LightGrey;
+	}
+	ul li:hover {
+		background: LightGreen;
+	}
+	li {
+		margin-left: 20px;
+		position: relative;
+		border-radius: 25px;
+
+	}
+	span {
+		margin-right: 0px;
+		position: absolute;
+		right: 0;
+		background-color: #CD5C5C;
+				border-radius: 25px;
 
 
-    	div {
-    		width: 45%;
-    		border-radius: 5px;
-    		background-color: #f2f2f2;
-    		padding: 20px;
-    		margin: auto;
-    	}
+	}
+	span:hover{
+		background-color: red;
+	}
+	edit {
+		margin-right: 40px;
+		position: absolute;
+		right: 0;
+		background-color: Gray;
+		border-radius: 5px;
 
-    	h1,h3,.selector{  font-family: Arial, Helvetica, sans-serif;
+	}
+	edit:hover{
+		background-color: Green;
+	}
 
-    		font-color: white;}
 
-    </style>
+	ul li.checked {
+		background: Yellow;
+		color: black;
+		font-style: bold;
+		text-decoration-thickness: auto;
+		text-decoration: line-through;
+
+	}
+	ul li.checked:hover {
+		background-color: LightGreen;
+	}
+
+	ul li.completed {
+		background: Green;
+		color: black;
+		font-style: bold;
+		text-decoration-thickness: auto;
+		text-decoration: line-through;
+	}
+	ul li.completed:hover {
+		background-color: Green;
+	}
+
+
+	div {
+		width: 45%;
+		border-radius: 5px;
+		background-color: #f2f2f2;
+		padding: 20px;
+		margin: auto;
+	}
+
+	h1,h3,.selector{  font-family: Arial, Helvetica, sans-serif;
+
+		font-color: white;}
+
+	</style>
 </head>
 
 <body>
@@ -138,7 +142,7 @@
 
 
 			<div class="selector">
-				<input type="checkbox" id="pending" name="pendng" value="pending">
+				<input type="checkbox" id="pending" name="pendng" value="pending" onclick="display(this)">
 				<label for="vehicle1">Display Pending</label><br>
 				<input type="checkbox" id="completed" name="completed" value="completed">
 				<label for="vehicle2">Display Completed</label><br>
@@ -150,95 +154,96 @@
 				<h3> current to-do items: </h3>
 			</center>
 
-			<input type = "submit" class= "submit" onclick="add()"></button>
+			<input type = "submit" class= "submit" onclick="add()">
 			<input type="text" id="inputField" size = "40" placeholder="Describe your to do list item here...">
 
 			<ul id="todoList">
 			</ul>
 
 		</center>
-		<div>
-		</body>
+	</div>
+</body>
 
 
 
-		<script>
-			document.querySelector('ul').addEventListener('click', function(ev) {
-				if (ev.target.tagName === 'LI') {
-					ev.target.classList.toggle('checked');
-				}			
-			}, false);
-			document.querySelector('ul').addEventListener('dblclick', function(ev) {
-				if (ev.target.tagName === 'LI') {
-					ev.target.classList.toggle('completed');
-				}			
-			}, false);
-
-			function add() {
-		  //this block will add a new list element to the element with id "todoList"
-		  //create list object
-		  let itemToAdd = document.createElement("LI");
-		  //get value from text field and put it in a textNode
-		  let newItem = document.createTextNode(document.getElementById("inputField").value );
-
-		  //update our var itemToAdd to contain the txtField value (as stored in textNode)
-		  itemToAdd.appendChild(newItem);
-		  let exitSpan = document.createElement( 'span' );
-		  exitSpan.appendChild( document.createTextNode( " × " ) );
-		  itemToAdd.appendChild( exitSpan );
-		  exitSpan.addEventListener('click', function () {
-		  	this.parentElement.remove();
-		  });
-
-		  let editSpan = document.createElement( 'edit' );
-		  editSpan.appendChild( document.createTextNode( "EDIT" ) );
-
-		  itemToAdd.appendChild( editSpan );
-
-		  editSpan.addEventListener('click', function () {
-	     	let p = prompt("Edit your entry");
-	 		while (p == ''){
- 				p = prompt("Sorry, null is not a valid list item value. Please enter a new list item value. " );
-	 		}
-    	
-	     	if(p===null){
-	        	itemToAdd.innerText =this.parentElement.childNodes[1].childNodes[1].value;
-	        	itemToAdd.appendChild(exitSpan);
-		  		itemToAdd.appendChild(editSpan);
-		  		return;
-
-		  	}
-		  	else{
-		  		itemToAdd.innerText=p;
-		  	}
-
-		  	itemToAdd.appendChild(exitSpan);
-		  	itemToAdd.appendChild(editSpan);
-
-			
-
-		    	//if cancel is selected
-		    	// if (read === null) {
-       //  		read = temp;
-       //  		return; //break out of the function early
-		    	// }
-		    
-
-		    // itemToAdd.innerText = p;
-		    // itemToAdd.appendChild(exitSpan);
-		    // itemToAdd.appendChild(editSpan);
+<script>
+	document.querySelector('ul').addEventListener('click', function(ev) {
+	if (ev.target.tagName === 'LI') {
+		ev.target.classList.toggle('checked');
+	}			
+	}, false);
+	document.querySelector('ul').addEventListener('dblclick', function(ev) {
+	if (ev.target.tagName === 'LI') {
+		ev.target.classList.toggle('completed');
+	}			
+	}, false);
 
 
-		});
 
-		  //this is where we need to check to make sure that the input field value is not null
-		  if( document.getElementById("inputField").value != ''){
-		  	todoList.appendChild(itemToAdd);
-		  	// todoList.appendChild(editItemToAdd );
-		  }
+function add() {
+	//this block will add a new list element to the element with id "todoList"
+	//create list object
+	let itemToAdd = document.createElement( "LI" );
+	//get value from text field and put it in a textNode
+	let newItem = document.createTextNode(document.getElementById("inputField").value );
 
-		}	
-	</script>
+	//update our var itemToAdd to contain the txtField value (as stored in textNode)
+	itemToAdd.appendChild(newItem);
+	let exitSpan = document.createElement( 'span' );
+	exitSpan.appendChild( document.createTextNode( " × " ) );
+	itemToAdd.appendChild( exitSpan );
+	exitSpan.addEventListener( 'click', function () {
+		this.parentElement.remove();
+	} );
 
-	</html>
+	let editSpan = document.createElement( 'edit' );
+	editSpan.appendChild( document.createTextNode( "EDIT" ) );
+	itemToAdd.appendChild( editSpan );
+
+	editSpan.addEventListener( 'click', function () {
+
+		let p = prompt("Edit your entry");
+
+		while ( p == '' ){
+		p = prompt( "Sorry, null is not a valid list item value. Please enter a new list item value. " );
+		}
+
+		if( p===null ){
+			itemToAdd.innerText =this.parentElement.childNodes[ 1 ].childNodes[ 1 ].value;
+			itemToAdd.appendChild( exitSpan );
+			itemToAdd.appendChild( editSpan );
+			return;
+		}
+		else{
+			itemToAdd.innerText=p;
+		}
+		itemToAdd.appendChild( exitSpan );
+		itemToAdd.appendChild( editSpan );
+	} );
+
+	//this is where we need to check to make sure that the input field value is not null
+	if( document.getElementById( "inputField" ).value != ''){
+		todoList.appendChild( itemToAdd );
+	}
+
+}
+
+function display( element ) {
+let myNodelist = document.getElementsByTagName( "LI" );
+
+for ( let i = 0; i < myNodelist.length ; i++){
+	// if ( element.checked ){
+	if( myNodelist[i].classList.contains('checked') ){
+		myNodelist[i].style.visibility = 'none';
+	}
+}
+
+
+}
+
+
+
+</script>
+
+</html>
 
