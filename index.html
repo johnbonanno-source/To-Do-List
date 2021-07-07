@@ -6,116 +6,175 @@
 	<!-- <link rel="stylesheet" href="https://linktostyles.css"> -->
 	<!-- <script src="https:linktojavascriptfile.js" crossorigin="JB"> -->
 		<!-- maybe it would be fruitful to use separate file for js and css  -->
-		<title>To-Do List Manager</title>
-		
-		<style>
-			input[type=text], select {
-				box-sizing: border-box;
-				width: 45%;
-				border-radius: 25px;
-			}
 
-			button[type=submit] {
-				background-color: green;
-			}
+<!-- 1. Begin the assignment by sending a link to the repository in a reply to this email no later than Thursday, July 1st.
 
-			.submit{
-				color: black;
-				background: white;
-				border-radius: 25px;	
+2. Build the implementation in 1 week while meeting at least the minimum functionality requirements:
+    - View a list of to-do items with the ability to filter the list by pending, complete, and all to-dos
+    - Create a new to-do item
+    - Edit a to-do item
+    - Delete a to-do item
+    - Complete a to-do item
 
-			}
-			.submit:hover {
-				background: LightGreen;
-			}
-			.input{
-				margin-right: 0px;
-				position: absolute;
-				right: 0;
-				
-			}
-
-			ul{
-				width: 65%;
-				margin: 0;
-				padding: 0;
-
-				list-style: none;
-				font-family: Tahoma, sans-serif;
-			}
-
-			ul li:nth-child(odd)
-			{
-				background-color: LightGrey;
-			}
-			ul li:hover {
-				background: LightGreen;
-			}
-			li {
-				margin-left: 20px;
-				position: relative;
-			}
-			span {
-				margin-right: 0px;
-				position: absolute;
-				right: 0;
-			}
-
-			
-			ul li.checked {
-				background: Yellow;
-				color: black;
-				font-style: bold;
-				text-decoration-thickness: auto;
-				text-decoration: line-through;
-
-			}
+    3. Complete the assignment by sending the deployed application link in a reply to this email no later than Thursday, July 8th. -->
 
 
-			div {
-				width: 45%;
-				border-radius: 5px;
-				background-color: #f2f2f2;
-				padding: 20px;
-				margin: auto;
-			}
+    <title>To-Do List Manager</title>
 
-			h1{font-color: white;}
+    <style>
+    	h1{font-style: arial;}
+    	input[type=text], select {
+    		box-sizing: border-box;
+    		width: 45%;
+    		border-radius: 25px;
+    	}
 
-		</style>
-		</head>
+    	button[type=submit] {
+    		background-color: green;
+    	}
 
-		<body>
-			<div>
-				<center>
+    	.submit{
+    		color: black;
+    		background: white;
+    		border-radius: 25px;	
 
-					<h1> Welcome to the to-do list manager </h1>
+    	}
+    	.submit:hover {
+    		background: LightGreen;
+    	}
+    	.input{
+    		margin-right: 0px;
+    		position: relative;
+    		right: 0;
 
-					<center>
-						<img src="https://i.imgur.com/1gTKJeD.jpg" width="300" height="200">
-						<h3> current to-do items: </h3>
-					</center>
+    	}
 
-					<input type ="submit" class="submit" onclick="add()"></button>
-					<input type="text" id="inputField" size = "40" placeholder="Describe your to do list item here...">
-					<ul id="todoList">
-					</ul>
 
-				</center>
-			<div>
+    	ul{
+    		width: 45%;
+    		margin: 0;
+    		padding: 0;
+
+    		list-style: none;
+    		font-family: Tahoma, sans-serif;
+    	}
+
+    	ul li:nth-child(odd)
+    	{
+    		background-color: LightGrey;
+    	}
+    	ul li:hover {
+    		background: LightGreen;
+    	}
+    	li {
+    		margin-left: 20px;
+    		position: relative;
+    	}
+    	span {
+    		margin-right: 0px;
+    		position: absolute;
+    		right: 0;
+    		background-color: #CD5C5C;
+
+    	}
+    	span:hover{
+    		background-color: red;
+    	}
+    	edit {
+    		margin-right: 40px;
+    		position: absolute;
+    		right: 0;
+    		background-color: Gray;
+    	}
+    	edit:hover{
+    		background-color: Green;
+    	}
+
+
+    	ul li.checked {
+    		background: Yellow;
+    		color: black;
+    		font-style: bold;
+    		text-decoration-thickness: auto;
+    		text-decoration: line-through;
+
+    	}
+    	ul li.checked:hover {
+    		background-color: LightGreen;
+    	}
+
+    	ul li.completed {
+    		background: Green;
+    		color: black;
+    		font-style: bold;
+    		text-decoration-thickness: auto;
+    		text-decoration: line-through;
+    	}
+    	ul li.completed:hover {
+    		background-color: LightGreen;
+    	}
+
+
+    	div {
+    		width: 45%;
+    		border-radius: 5px;
+    		background-color: #f2f2f2;
+    		padding: 20px;
+    		margin: auto;
+    	}
+
+    	h1,h3,.selector{  font-family: Arial, Helvetica, sans-serif;
+
+    		font-color: white;}
+
+    </style>
+</head>
+
+<body>
+	<div>
+		<center>
+
+			<h1> Welcome to the to-do list manager </h1>
+
+
+			<div class="selector">
+				<input type="checkbox" id="pending" name="pendng" value="pending">
+				<label for="vehicle1">Display Pending</label><br>
+				<input type="checkbox" id="completed" name="completed" value="completed">
+				<label for="vehicle2">Display Completed</label><br>
+			</div>
+
+
+			<center>
+				<img src="https://i.imgur.com/1gTKJeD.jpg" width="300" height="200">
+				<h3> current to-do items: </h3>
+			</center>
+
+			<input type = "submit" class= "submit" onclick="add()"></button>
+			<input type="text" id="inputField" size = "40" placeholder="Describe your to do list item here...">
+
+			<ul id="todoList">
+			</ul>
+
+		</center>
+		<div>
 		</body>
 
 
 
-	<script>
-		var list = document.querySelector('ul');
-		document.querySelector('ul').addEventListener('click', function(ev) {
-			if (ev.target.tagName === 'LI') {
-				ev.target.classList.toggle('checked');
-			}
-		}, false);
+		<script>
+			document.querySelector('ul').addEventListener('click', function(ev) {
+				if (ev.target.tagName === 'LI') {
+					ev.target.classList.toggle('checked');
+				}			
+			}, false);
+			document.querySelector('ul').addEventListener('dblclick', function(ev) {
+				if (ev.target.tagName === 'LI') {
+					ev.target.classList.toggle('completed');
+				}			
+			}, false);
 
-		function add() {
+			function add() {
 		  //this block will add a new list element to the element with id "todoList"
 		  //create list object
 		  let itemToAdd = document.createElement("LI");
@@ -124,19 +183,62 @@
 
 		  //update our var itemToAdd to contain the txtField value (as stored in textNode)
 		  itemToAdd.appendChild(newItem);
-		  let exitSpan = document.createElement( 'span' )
-		  exitSpan.appendChild( document.createTextNode( "×" ) );
+		  let exitSpan = document.createElement( 'span' );
+		  exitSpan.appendChild( document.createTextNode( " × " ) );
 		  itemToAdd.appendChild( exitSpan );
 		  exitSpan.addEventListener('click', function () {
 		  	this.parentElement.remove();
 		  });
+
+		  let editSpan = document.createElement( 'edit' );
+		  editSpan.appendChild( document.createTextNode( "EDIT" ) );
+
+		  itemToAdd.appendChild( editSpan );
+
+		  editSpan.addEventListener('click', function () {
+	     	let p = prompt("Edit your entry");
+	 		while (p == ''){
+ 				p = prompt("Sorry, null is not a valid list item value. Please enter a new list item value. " );
+	 		}
+    	
+	     	if(p===null){
+	        	itemToAdd.innerText =this.parentElement.childNodes[1].childNodes[1].value;
+	        	itemToAdd.appendChild(exitSpan);
+		  		itemToAdd.appendChild(editSpan);
+		  		return;
+
+		  	}
+		  	else{
+		  		itemToAdd.innerText=p;
+		  	}
+
+		  	itemToAdd.appendChild(exitSpan);
+		  	itemToAdd.appendChild(editSpan);
+
+			
+
+		    	//if cancel is selected
+		    	// if (read === null) {
+       //  		read = temp;
+       //  		return; //break out of the function early
+		    	// }
+		    
+
+		    // itemToAdd.innerText = p;
+		    // itemToAdd.appendChild(exitSpan);
+		    // itemToAdd.appendChild(editSpan);
+
+
+		});
+
 		  //this is where we need to check to make sure that the input field value is not null
 		  if( document.getElementById("inputField").value != ''){
 		  	todoList.appendChild(itemToAdd);
+		  	// todoList.appendChild(editItemToAdd );
 		  }
 
 		}	
 	</script>
 
-</html>
+	</html>
 
