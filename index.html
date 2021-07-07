@@ -107,14 +107,14 @@
 		background-color: LightGreen;
 	}
 
-	ul li.completed {
+	ul li.finished {
 		background: Green;
 		color: black;
 		font-style: bold;
 		text-decoration-thickness: auto;
 		text-decoration: line-through;
 	}
-	ul li.completed:hover {
+	ul li.finished:hover {
 		background-color: Green;
 	}
 
@@ -167,20 +167,28 @@
 
 
 <script>
+	//when a list item is single clicked it becomes a pending item
 	document.querySelector('ul').addEventListener('click', function(ev) {
 	if (ev.target.tagName === 'LI') {
 		ev.target.classList.toggle('checked');
 	}			
 	}, false);
+	//when a list item is double clicked it becomes a completed item
 	document.querySelector('ul').addEventListener('dblclick', function(ev) {
 	if (ev.target.tagName === 'LI') {
-		ev.target.classList.toggle('completed');
+		ev.target.classList.toggle('finished');
 	}			
 	}, false);
 
 
 
 function add() {
+
+	//if the filters are applied while adding new (non pending nor completed items) they will be hidden (see 238 )
+  	var pendingBox = document.getElementById('pending').checked;
+  	var completedBox = document.getElementById('completed').checked;
+
+
 	//this block will add a new list element to the element with id "todoList"
 	//create list object
 	let itemToAdd = document.createElement( "LI" );
@@ -189,6 +197,8 @@ function add() {
 
 	//update our var itemToAdd to contain the txtField value (as stored in textNode)
 	itemToAdd.appendChild(newItem);
+
+	//create a span to contain our item - delete button
 	let exitSpan = document.createElement( 'span' );
 	exitSpan.appendChild( document.createTextNode( " × " ) );
 	itemToAdd.appendChild( exitSpan );
@@ -196,6 +206,7 @@ function add() {
 		this.parentElement.remove();
 	} );
 
+	//create class to contain our edit button
 	let editSpan = document.createElement( 'edit' );
 	editSpan.appendChild( document.createTextNode( "EDIT" ) );
 	itemToAdd.appendChild( editSpan );
@@ -205,9 +216,14 @@ function add() {
 		let p = prompt("Edit your entry");
 
 		while ( p == '' ){
+
 		p = prompt( "Sorry, null is not a valid list item value. Please enter a new list item value. " );
+
 		}
 
+		//if we try and edit a item and then cancel, we want to restore old value
+		//because prompt when finished returns a string, and cancelled returns a null
+		//we will check if null, if else use the string to re-assign new value to li
 		if( p===null ){
 			itemToAdd.innerText =this.parentElement.childNodes[ 1 ].childNodes[ 1 ].value;
 			itemToAdd.appendChild( exitSpan );
@@ -221,44 +237,77 @@ function add() {
 		itemToAdd.appendChild( editSpan );
 	} );
 
+
+
 	//this is where we need to check to make sure that the input field value is not null
 	if( document.getElementById( "inputField" ).value != ''){
+
+		//this is where we insure no filters are applied when adding new li
+		if(pendingBox||completedBox){
+			itemToAdd.style.visibility = 'hidden';
+		}
+		
 		todoList.appendChild( itemToAdd );
+
 	}
 
 }
 
+//this display funx gets called on click of 
+//[show pending] checkbox
+
 function display( element ) {
   let myNodelist = document.getElementsByTagName( "LI" );
+  var pendingBox = document.getElementById('pending').checked;
+  var completedBox = document.getElementById('completed').checked;
+
 
   for ( let i = 0; i < myNodelist.length ; i++){
-    if( element.checked ){
-        if( myNodelist[i].classList.contains('checked') ){
-          myNodelist[i].style.visibility = 'visible';
-        }
-        else{myNodelist[i].style.visibility = 'hidden';}
-    }
-    else{
-       myNodelist[i].style.visibility = 'visible';
-    }
+  	if( element.checked ){
+  		if( (myNodelist[i].classList.contains('checked') ) || completedBox && myNodelist[i].classList.contains('finished') ){
+  			myNodelist[i].style.visibility = 'visible';
+  		}
+  		else{myNodelist[i].style.visibility = 'hidden';}
+  	}
+  	else{
+  		if(!completedBox){
+  			myNodelist[i].style.visibility = 'visible';
+  		}
 
+  		else if(myNodelist[i].classList.contains('finished')){
+  			myNodelist[i].style.visibility = 'visible';
+  		}
+  		else{myNodelist[i].style.visibility = 'hidden';}
+  	}
   }
+
 }
+
+//this display funx gets called on click of 
+//[show completed] checkbox
+
 function display2( element ) {
-  let myNodelist = document.getElementsByTagName( "LI" );
+	let myNodelist = document.getElementsByTagName( "LI" );
+	var pendingBox = document.getElementById('pending').checked;
+	var completedBox = document.getElementById('completed').checked;
+	for ( let i = 0; i < myNodelist.length ; i++){
+		if( element.checked ){
+			if( (myNodelist[i].classList.contains('finished') ) || pendingBox && myNodelist[i].classList.contains('checked')){
+				myNodelist[i].style.visibility = 'visible';
+			}
+			else{myNodelist[i].style.visibility = 'hidden';}
+		}
+		else{
+			if(!pendingBox){
+				myNodelist[i].style.visibility = 'visible';
+			}
+			else if(myNodelist[i].classList.contains('checked')){
+				myNodelist[i].style.visibility = 'visible';
+			}
+			else{myNodelist[i].style.visibility = 'hidden';}
+		}
 
-  for ( let i = 0; i < myNodelist.length ; i++){
-    if( element.checked ){
-        if( myNodelist[i].classList.contains('completed') ){
-          myNodelist[i].style.visibility = 'visible';
-        }
-        else{myNodelist[i].style.visibility = 'hidden';}
-    }
-    else{
-       myNodelist[i].style.visibility = 'visible';
-    }
-
-  }
+	}
 }
 
 
