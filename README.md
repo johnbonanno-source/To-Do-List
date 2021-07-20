@@ -1,4 +1,4 @@
-#To-Do list manager
+# Front-end To-Do list manager
 deployed at https://johnbonanno.github.io/kadinceToDo/index.html
 
 
@@ -9,3 +9,4 @@ You may mark a item as pending by clicking it once or as completed by clicking i
 
 Filter by pending items, completed items, or both completed and pending items by selecting the check boxes.
 
+I will eventually update this to use local memory or a database. 
